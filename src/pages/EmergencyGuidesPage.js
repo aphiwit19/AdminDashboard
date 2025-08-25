@@ -140,7 +140,7 @@ const EmergencyGuidesPage = () => {
   if (loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-        <CircularProgress size={50} sx={{ color: '#FF5722' }} />
+        <CircularProgress size={50} sx={{ color: '#E64646' }} />
       </Box>
     );
   }
@@ -148,7 +148,7 @@ const EmergencyGuidesPage = () => {
   return (
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-        <Typography variant="h4" sx={{ color: '#FF5722', fontWeight: 'bold' }}>
+        <Typography variant="h4" sx={{ color: '#2E4057', fontWeight: 'bold' }}>
           Emergency Guides
         </Typography>
         <Button
@@ -156,8 +156,8 @@ const EmergencyGuidesPage = () => {
           startIcon={<AddIcon />}
           onClick={() => handleOpenDialog()}
           sx={{
-            bgcolor: '#FF5722',
-            '&:hover': { bgcolor: '#E64A19' }
+            bgcolor: '#27AE60',
+            '&:hover': { bgcolor: '#219A52' }
           }}
         >
           เพิ่มคู่มือฉุกเฉิน
@@ -173,7 +173,7 @@ const EmergencyGuidesPage = () => {
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow sx={{ bgcolor: '#FFF3E0' }}>
+            <TableRow sx={{ bgcolor: '#E8F4FD' }}>
               <TableCell sx={{ fontWeight: 'bold' }}>หัวข้อ</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>รายละเอียด</TableCell>
               <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>จัดการ</TableCell>
@@ -196,9 +196,8 @@ const EmergencyGuidesPage = () => {
                 </TableCell>
                 <TableCell sx={{ textAlign: 'center' }}>
                   <IconButton
-                    color="primary"
+                    sx={{ mr: 1, color: '#F39C12' }}
                     onClick={() => handleOpenDialog(item)}
-                    sx={{ mr: 1 }}
                   >
                     <EditIcon />
                   </IconButton>
@@ -264,8 +263,8 @@ const EmergencyGuidesPage = () => {
             variant="contained"
             disabled={saving}
             sx={{
-              bgcolor: '#FF5722',
-              '&:hover': { bgcolor: '#E64A19' }
+              bgcolor: '#27AE60',
+              '&:hover': { bgcolor: '#219A52' }
             }}
           >
             {saving ? <CircularProgress size={20} /> : (editingItem ? 'อัปเดต' : 'เพิ่ม')}

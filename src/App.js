@@ -17,7 +17,7 @@ import './App.css';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#FF5722',
+      main: '#E64646',
     },
     secondary: {
       main: '#2196F3',

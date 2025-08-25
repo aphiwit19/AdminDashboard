@@ -170,14 +170,14 @@ const UsersPage = () => {
   if (loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-        <CircularProgress size={50} sx={{ color: '#FF5722' }} />
+        <CircularProgress size={50} sx={{ color: '#7F8C8D' }} />
       </Box>
     );
   }
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 3, color: '#FF5722', fontWeight: 'bold' }}>
+      <Typography variant="h4" sx={{ mb: 3, color: '#2E4057', fontWeight: 'bold' }}>
         Users
       </Typography>
 
@@ -190,12 +190,13 @@ const UsersPage = () => {
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
-            <TableRow sx={{ bgcolor: '#FFF3E0' }}>
+            <TableRow sx={{ bgcolor: '#E8F4FD' }}>
               <TableCell sx={{ fontWeight: 'bold' }}>ชื่อ</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>อีเมล</TableCell>
               <TableCell sx={{ fontWeight: 'bold' }}>โทรศัพท์</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>สิทธิ์</TableCell>
-              <TableCell sx={{ fontWeight: 'bold' }}>สถานะ</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>เพศ</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>กรุ๊ปเลือด</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>โรคประจำตัว</TableCell>
+              <TableCell sx={{ fontWeight: 'bold' }}>ภูมิแพ้</TableCell>
               <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' }}>จัดการ</TableCell>
             </TableRow>
           </TableHead>
@@ -203,29 +204,22 @@ const UsersPage = () => {
             {users.map((user) => (
               <TableRow key={user.userId} hover>
                 <TableCell>{user.name || 'ไม่ระบุ'}</TableCell>
-                <TableCell>{user.email || 'ไม่ระบุ'}</TableCell>
                 <TableCell>{user.phone || 'ไม่ระบุ'}</TableCell>
-                <TableCell>
-                  <Chip 
-                    label={getRoleLabel(user.role)} 
-                    size="small" 
-                    sx={{ 
-                      bgcolor: getRoleColor(user.role), 
-                      color: 'white' 
-                    }} 
-                  />
-                </TableCell>
-                <TableCell>
-                  <Chip 
-                    label={user.isActive ? 'ใช้งาน' : 'ไม่ใช้งาน'} 
-                    size="small" 
-                    color={user.isActive ? 'success' : 'error'}
-                  />
-                </TableCell>
+                <TableCell>{user.gender || 'ไม่ระบุ'}</TableCell>
+                <TableCell>{user.bloodType || 'ไม่ระบุ'}</TableCell>
+                <TableCell>{user.disease || 'ไม่ระบุ'}</TableCell>
+                <TableCell>{user.allergy || 'ไม่ระบุ'}</TableCell>
                 <TableCell sx={{ textAlign: 'center' }}>
                   <IconButton
-                    color="primary"
+                    sx={{
+                      color: '#E64646',
+                      '&:hover': {
+                        backgroundColor: '#FFE8E8',
+                        color: '#C23E3E'
+                      }
+                    }}
                     onClick={() => handleViewUser(user)}
+                    title="ดูรายชื่อติดต่อฉุกเฉินและประวัติ SOS"
                   >
                     <VisibilityIcon />
                   </IconButton>
@@ -249,55 +243,14 @@ const UsersPage = () => {
         <DialogTitle>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <PersonIcon />
-            ข้อมูลผู้ใช้: {selectedUser?.name || 'ไม่ระบุ'}
+            รายชื่อติดต่อฉุกเฉินและประวัติ SOS: {selectedUser?.name || 'ไม่ระบุ'}
           </Box>
         </DialogTitle>
         <DialogContent>
           {selectedUser && (
             <Box>
-              {/* ข้อมูลส่วนตัว */}
-              <Typography variant="h6" sx={{ mb: 2, color: '#FF5722' }}>
-                ข้อมูลส่วนตัว
-              </Typography>
-              <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, mb: 3 }}>
-                <Box>
-                  <Typography variant="body2" color="text.secondary">ชื่อ:</Typography>
-                  <Typography variant="body1">{selectedUser.name || 'ไม่ระบุ'}</Typography>
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary">อีเมล:</Typography>
-                  <Typography variant="body1">{selectedUser.email || 'ไม่ระบุ'}</Typography>
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary">โทรศัพท์:</Typography>
-                  <Typography variant="body1">{selectedUser.phone || 'ไม่ระบุ'}</Typography>
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary">เพศ:</Typography>
-                  <Typography variant="body1">{selectedUser.gender || 'ไม่ระบุ'}</Typography>
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary">กรุ๊ปเลือด:</Typography>
-                  <Typography variant="body1">{selectedUser.bloodType || 'ไม่ระบุ'}</Typography>
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary">โรคประจำตัว:</Typography>
-                  <Typography variant="body1">{selectedUser.disease || 'ไม่ระบุ'}</Typography>
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary">ภูมิแพ้:</Typography>
-                  <Typography variant="body1">{selectedUser.allergy || 'ไม่ระบุ'}</Typography>
-                </Box>
-                <Box>
-                  <Typography variant="body2" color="text.secondary">วันที่สมัคร:</Typography>
-                  <Typography variant="body1">{formatDate(selectedUser.createdAt)}</Typography>
-                </Box>
-              </Box>
-
-              <Divider sx={{ my: 2 }} />
-
               {/* รายชื่อติดต่อ */}
-              <Typography variant="h6" sx={{ mb: 2, color: '#FF5722', display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Typography variant="h6" sx={{ mb: 2, color: '#E64646', display: 'flex', alignItems: 'center', gap: 1 }}>
                 <PhoneIcon />
                 รายชื่อติดต่อฉุกเฉิน
               </Typography>
@@ -335,7 +288,7 @@ const UsersPage = () => {
               <Divider sx={{ my: 2 }} />
 
               {/* SOS History */}
-              <Typography variant="h6" sx={{ mb: 2, color: '#FF5722', display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Typography variant="h6" sx={{ mb: 2, color: '#E64646', display: 'flex', alignItems: 'center', gap: 1 }}>
                 <HistoryIcon />
                 ประวัติการใช้ SOS
               </Typography>

@@ -20,7 +20,7 @@ import emergencyGuideService from '../services/emergency_guide.service.js';
 import firstAidService from '../services/first_aid.service.js';
 import userService from '../services/user.service.js';
 
-const StatCard = ({ title, value, icon, color = '#FF5722' }) => (
+const StatCard = ({ title, value, icon, color = '#E64646' }) => (
   <Card sx={{ height: '100%' }}>
     <CardContent>
       <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -92,7 +92,7 @@ const DashboardPage = () => {
   if (loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-        <CircularProgress size={50} sx={{ color: '#FF5722' }} />
+        <CircularProgress size={50} sx={{ color: '#E64646' }} />
       </Box>
     );
   }
@@ -107,7 +107,7 @@ const DashboardPage = () => {
 
   return (
     <Box>
-      <Typography variant="h4" sx={{ mb: 4, color: '#FF5722', fontWeight: 'bold' }}>
+      <Typography variant="h4" sx={{ color: '#2E4057', fontWeight: 'bold' }}>
         Dashboard
       </Typography>
 
@@ -117,7 +117,7 @@ const DashboardPage = () => {
             title="Emergency Numbers"
             value={stats.emergencyNumbers}
             icon={<PhoneIcon />}
-            color="#FF5722"
+            color="#E64646"
           />
         </Grid>
 
@@ -152,7 +152,7 @@ const DashboardPage = () => {
       <Box sx={{ mt: 4 }}>
         <Card>
           <CardContent>
-            <Typography variant="h6" sx={{ mb: 2, color: '#FF5722' }}>
+            <Typography variant="h6" sx={{ mb: 2, color: '#2E4057' }}>
               ยินดีต้อนรับสู่ SOS Admin Dashboard
             </Typography>
             <Typography variant="body1" color="text.secondary">

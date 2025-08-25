@@ -45,7 +45,7 @@ const AdminLayout = ({ children }) => {
         sx={{
           width: { md: `calc(100% - ${drawerWidth}px)` },
           ml: { md: `${drawerWidth}px` },
-          bgcolor: '#FF5722'
+          bgcolor: '#E64646'
         }}
       >
         <Toolbar>

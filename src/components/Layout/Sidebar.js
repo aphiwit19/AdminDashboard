@@ -60,7 +60,7 @@ const Sidebar = () => {
     <Box>
       {/* Logo/Title */}
       <Toolbar>
-        <Typography variant="h6" noWrap component="div" sx={{ color: '#FF5722', fontWeight: 'bold' }}>
+        <Typography variant="h6" noWrap component="div" sx={{ color: '#E64646', fontWeight: 'bold' }}>
           SOS Admin
         </Typography>
       </Toolbar>
@@ -76,21 +76,21 @@ const Sidebar = () => {
               onClick={() => handleNavigation(item.path)}
               sx={{
                 '&.Mui-selected': {
-                  backgroundColor: '#FF5722',
+                  backgroundColor: '#E64646',
                   color: 'white',
                   '&:hover': {
-                    backgroundColor: '#E64A19'
+                    backgroundColor: '#C23E3E'
                   },
                   '& .MuiListItemIcon-root': {
                     color: 'white'
                   }
                 },
                 '&:hover': {
-                  backgroundColor: '#FFF3E0'
+                  backgroundColor: '#FFE8E8'
                 }
               }}
             >
-              <ListItemIcon sx={{ color: location.pathname === item.path ? 'white' : '#FF5722' }}>
+              <ListItemIcon sx={{ color: location.pathname === item.path ? 'white' : '#E64646' }}>
                 {item.icon}
               </ListItemIcon>
               <ListItemText primary={item.text} />
