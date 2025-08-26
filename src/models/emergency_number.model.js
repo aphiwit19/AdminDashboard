@@ -2,9 +2,10 @@
 export class EmergencyNumber {
   constructor(data = {}) {
     this.id = data.id || '';
-    this.name = data.name || '';
-    this.number = data.number || '';
-    this.category = data.category || '';
+    // Normalize types and trim
+    this.name = (data.name ?? '').toString().trim();
+    this.number = (data.number ?? '').toString().trim();
+    this.category = (data.category ?? '').toString().trim();
   }
 
   // แปลงเป็น object สำหรับ Firestore
@@ -12,7 +13,7 @@ export class EmergencyNumber {
     return {
       name: this.name,
       number: this.number,
-      category: this.category
+      category: this.category,
     };
   }
 
@@ -28,9 +29,9 @@ export class EmergencyNumber {
   // Validation
   validate() {
     const errors = [];
-    if (!this.name.trim()) errors.push('ชื่อหน่วยงานห้ามว่าง');
-    if (!this.number.trim()) errors.push('หมายเลขโทรศัพท์ห้ามว่าง');
-    if (!this.category.trim()) errors.push('หมวดหมู่ห้ามว่าง');
+    if (!this.name) errors.push('ชื่อหน่วยงานห้ามว่าง');
+    if (!this.number) errors.push('หมายเลขโทรศัพท์ห้ามว่าง');
+    if (!this.category) errors.push('หมวดหมู่ห้ามว่าง');
     return errors;
   }
 }

@@ -20,7 +20,10 @@ import {
   Alert,
   CircularProgress,
   Chip,
+  FormControl,
+  FormHelperText,
 } from "@mui/material";
+import { Autocomplete } from "@mui/material";
 import {
   Add as AddIcon,
   Edit as EditIcon,
@@ -108,7 +111,9 @@ const EmergencyNumbersPage = () => {
     const errors = {};
     if (!formData.name.trim()) errors.name = "ชื่อหน่วยงานห้ามว่าง";
     if (!formData.number.trim()) errors.number = "หมายเลขโทรศัพท์ห้ามว่าง";
-    if (!formData.category.trim()) errors.category = "หมวดหมู่ห้ามว่าง";
+    if (!formData.category.trim()) {
+      errors.category = "หมวดหมู่ห้ามว่าง";
+    }
 
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
@@ -263,17 +268,26 @@ const EmergencyNumbersPage = () => {
             helperText={formErrors.number}
             sx={{ mb: 2 }}
           />
-          <TextField
-            margin="dense"
-            label="หมวดหมู่"
-            fullWidth
-            variant="outlined"
-            value={formData.category}
-            onChange={(e) => handleInputChange("category", e.target.value)}
-            error={!!formErrors.category}
-            helperText={formErrors.category}
-            placeholder="เช่น ตำรวจ, โรงพยาบาล, ดับเพลิง"
-          />
+          <FormControl fullWidth margin="dense" error={!!formErrors.category}>
+            <Autocomplete
+              freeSolo
+              options={[...new Set(emergencyNumbers.map((x) => x.category))]
+                .filter(Boolean)
+                .sort((a, b) => a.localeCompare(b))}
+              value={formData.category}
+              onInputChange={(_, newInput) => handleInputChange("category", newInput || "")}
+              onChange={(_, newValue) => handleInputChange("category", newValue || "")}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="หมวดหมู่"
+                  variant="outlined"
+                  error={!!formErrors.category}
+                  helperText={formErrors.category}
+                />
+              )}
+            />
+          </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog}>ยกเลิก</Button>
