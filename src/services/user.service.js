@@ -33,14 +33,10 @@ class UserService {
             userId: doc.id,
             name: userData.name || '',
             phone: userData.phone || '',
-            email: userData.email || '',
-            role: userData.role || 'user',
             gender: userData.gender || null,
             bloodType: userData.bloodType || null,
             disease: userData.disease || null,
-            allergy: userData.allergy || null,
-            isActive: userData.isActive !== undefined ? userData.isActive : true,
-            createdAt: userData.createdAt || null
+            allergy: userData.allergy || null
           });
           users.push(user);
         } catch (error) {
@@ -146,11 +142,16 @@ class UserService {
     console.log('🔄 กำลังคำนวณสถิติผู้ใช้...');
     try {
       const users = await this.getAll();
+      
+      // นำเข้า adminService เพื่อดึงข้อมูล admins
+      const adminService = (await import('./admin.service.js')).default;
+      const admins = await adminService.getAll();
+      
       const stats = {
         totalUsers: users.length,
-        activeUsers: users.filter(user => user.isActive).length,
-        adminUsers: users.filter(user => user.role === 'admin' || user.role === 'super_admin').length,
-        regularUsers: users.filter(user => user.role === 'user').length
+        activeUsers: users.length, // นับทุกคนเป็น active เนื่องจากไม่มีฟิลด์ isActive แล้ว
+        adminUsers: admins.length, // ดึงจำนวน admin จาก collection admins
+        regularUsers: users.length // นับผู้ใช้ทั้งหมดใน users เป็น regular users
       };
       
       console.log('📊 สถิติผู้ใช้:', stats);
